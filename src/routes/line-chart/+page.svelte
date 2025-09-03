@@ -267,21 +267,4 @@
   </div>
 </div>
 
-<!-- Svelte features explanation -->
-<div 
-  class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mt-6 border border-blue-200 dark:border-blue-800"
-  in:fly={{ y: 20, duration: 600, delay: 500 }}
-  out:fade
->
-  <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
-     Svelte Features Demonstrated
-  </h3>
-  <ul class="space-y-2 text-sm text-blue-800 dark:text-blue-200">
-    <li><strong>Stores:</strong> Using writable stores for global state management (salesData, totalSales, averageProfit)</li>
-    <li><strong>Reactivity:</strong> Chart automatically updates when store data changes</li>
-    <li><strong>Derived Stores:</strong> totalSales and averageProfit are computed from salesData</li>
-    <li><strong>Transitions:</strong> Smooth page transitions and component animations</li>
-    <li><strong>Event Handling:</strong> Button clicks trigger store updates</li>
-    <li><strong>Lifecycle:</strong> onMount and onDestroy for setup and cleanup</li>
-  </ul>
-</div>
+

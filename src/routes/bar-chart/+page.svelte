@@ -4,6 +4,9 @@
   import ChartJSBarChart from '$lib/components/charts/ChartJSBarChart.svelte';
   import { categoryData } from '$lib/stores/data.js';
   import { BarChart } from 'lucide-svelte';
+  import MotionDiv from '$lib/components/MotionDiv.svelte';
+  import MotionButton from '$lib/components/MotionButton.svelte';
+  import MotionCard from '$lib/components/MotionCard.svelte';
   
   // Demonstrates Svelte local state and reactivity
   let selectedCategory = '';
@@ -93,68 +96,109 @@
 </svelte:head>
 
 <!-- Page header -->
-<div 
+<MotionDiv 
   class="mb-8"
-  in:fly={{ y: -20, duration: 600 }}
-  out:fade
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
 >
   <div class="flex items-center space-x-4 mb-4">
-    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+    <MotionDiv 
+      class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg"
+      initial={{ scale: 0, rotate: -180 }}
+      animate={{ scale: 1, rotate: 0 }}
+      transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 200 }}
+      whileHover={{ scale: 1.1, rotate: 5 }}
+    >
       <BarChart class="w-6 h-6 text-white" />
-    </div>
+    </MotionDiv>
     <div>
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
-        Category Analysis
-      </h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Modern Chart.js bar chart with beautiful gradients and interactive features
-      </p>
+      <MotionDiv
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+          Category Analysis
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">
+          Modern Chart.js bar chart with beautiful gradients and interactive features
+        </p>
+      </MotionDiv>
     </div>
   </div>
-</div>
+</MotionDiv>
 
 <!-- Controls section -->
-<div 
+<MotionCard 
   class="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-6 mb-6 border border-gray-200 dark:border-dark-700"
-  in:fly={{ y: 20, duration: 600, delay: 100 }}
-  out:fade
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.1 }}
+  whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
 >
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div class="flex items-center space-x-4">
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-        Data Controls
-      </h2>
+      <MotionDiv
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Data Controls
+        </h2>
+      </MotionDiv>
     </div>
     
     <div class="flex items-center space-x-3">
-      <button
+      <MotionButton
         on:click={addCategory}
-        class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors duration-200"
+        class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        whileHover={{ scale: 1.05, backgroundColor: "#16a34a" }}
+        whileTap={{ scale: 0.95 }}
       >
         ➕ Add Category
-      </button>
+      </MotionButton>
       
-      <button
+      <MotionButton
         on:click={removeCategory}
         disabled={!selectedCategory}
-        class="px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors duration-200"
+        class="px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.4 }}
+        whileHover={{ scale: 1.05, backgroundColor: "#dc2626" }}
+        whileTap={{ scale: 0.95 }}
       >
         🗑️ Remove Selected
-      </button>
+      </MotionButton>
       
-      <button
+      <MotionButton
         on:click={shuffleData}
-        class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-colors duration-200"
+        class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
+        whileHover={{ scale: 1.05, backgroundColor: "#9333ea" }}
+        whileTap={{ scale: 0.95 }}
       >
         🔀 Shuffle Data
-      </button>
+      </MotionButton>
       
-      <button
+      <MotionButton
         on:click={resetData}
-        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors duration-200"
+        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.6 }}
+        whileHover={{ scale: 1.05, backgroundColor: "#6b7280" }}
+        whileTap={{ scale: 0.95 }}
       >
         🔄 Reset Data
-      </button>
+      </MotionButton>
     </div>
   </div>
   
@@ -166,153 +210,241 @@
       </p>
     </div>
   {/if}
-</div>
+</MotionCard>
 
 <!-- Stats cards -->
-<div 
+<MotionDiv 
   class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6"
-  in:fly={{ y: 20, duration: 600, delay: 200 }}
-  out:fade
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
 >
-  <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
+  <MotionCard
+    class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white"
+    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.3 }}
+    whileHover={{ y: -5, scale: 1.05, boxShadow: "0 20px 25px -5px rgba(59, 130, 246, 0.3)" }}
+  >
     <h3 class="text-sm font-medium opacity-90 mb-1">Total Categories</h3>
-    <div class="text-2xl font-bold">
+    <MotionDiv
+      class="text-2xl font-bold"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
+    >
       {$categoryData.length}
-    </div>
+    </MotionDiv>
     <p class="text-sm opacity-75 mt-1">Active categories</p>
-  </div>
+  </MotionCard>
   
-  <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+  <MotionCard
+    class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white"
+    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.4 }}
+    whileHover={{ y: -5, scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3)" }}
+  >
     <h3 class="text-sm font-medium opacity-90 mb-1">Total Value</h3>
-    <div class="text-2xl font-bold">
+    <MotionDiv
+      class="text-2xl font-bold"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.6, type: "spring", stiffness: 200 }}
+    >
       {$categoryData.reduce((sum, d) => sum + d.value, 0)}%
-    </div>
+    </MotionDiv>
     <p class="text-sm opacity-75 mt-1">Combined percentage</p>
-  </div>
+  </MotionCard>
   
-  <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white">
+  <MotionCard
+    class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white"
+    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.5 }}
+    whileHover={{ y: -5, scale: 1.05, boxShadow: "0 20px 25px -5px rgba(147, 51, 234, 0.3)" }}
+  >
     <h3 class="text-sm font-medium opacity-90 mb-1">Highest Value</h3>
-    <div class="text-2xl font-bold">
+    <MotionDiv
+      class="text-2xl font-bold"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.7, type: "spring", stiffness: 200 }}
+    >
       {Math.max(...$categoryData.map(d => d.value))}%
-    </div>
+    </MotionDiv>
     <p class="text-sm opacity-75 mt-1">Top category</p>
-  </div>
+  </MotionCard>
   
-  <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white">
+  <MotionCard
+    class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white"
+    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.6 }}
+    whileHover={{ y: -5, scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)" }}
+  >
     <h3 class="text-sm font-medium opacity-90 mb-1">Average Value</h3>
-    <div class="text-2xl font-bold">
+    <MotionDiv
+      class="text-2xl font-bold"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 200 }}
+    >
       {Math.round($categoryData.reduce((sum, d) => sum + d.value, 0) / $categoryData.length)}%
-    </div>
+    </MotionDiv>
     <p class="text-sm opacity-75 mt-1">Mean percentage</p>
-  </div>
-</div>
+  </MotionCard>
+</MotionDiv>
 
 <!-- Main chart -->
-<div 
+<MotionCard 
   class="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-dark-700"
-  in:fly={{ y: 20, duration: 600, delay: 300 }}
-  out:fade
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+  whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
 >
   <div class="mb-6">
     <div class="flex items-center justify-between mb-4">
-      <div>
+      <MotionDiv
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
           Category Distribution
         </h2>
         <p class="text-gray-600 dark:text-gray-400 text-sm">
           Beautiful Chart.js bar chart with gradient fills and smooth animations
         </p>
-      </div>
-      <div class="flex items-center space-x-2">
-        <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+      </MotionDiv>
+      <MotionDiv
+        class="flex items-center space-x-2"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <MotionDiv 
+          class="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.6, type: "spring", stiffness: 200 }}
+        ></MotionDiv>
         <span class="text-sm text-gray-600 dark:text-gray-400">Interactive Bars</span>
-      </div>
+      </MotionDiv>
     </div>
   </div>
   
   <!-- Debug: Show data info -->
-  <div class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+  <MotionDiv 
+    class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg"
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, delay: 0.6 }}
+  >
     <p class="text-sm text-gray-600 dark:text-gray-400">
       <strong>Data Status:</strong> {$categoryData.length} items loaded
       {#if $categoryData.length > 0}
         | First item: {$categoryData[0].category} - Value: {$categoryData[0].value}%
       {/if}
     </p>
-  </div>
+  </MotionDiv>
   
   <!-- Bar chart component -->
-  <ChartJSBarChart 
-    data={$categoryData} 
-    width={800} 
-    height={400}
-    animated={true}
-  />
-</div>
+  <MotionDiv
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+  >
+    <ChartJSBarChart 
+      data={$categoryData} 
+      width={800} 
+      height={400}
+      animated={true}
+    />
+  </MotionDiv>
+</MotionCard>
 
 <!-- Category details -->
-<div 
+<MotionCard 
   class="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-dark-700 mt-6"
-  in:fly={{ y: 20, duration: 600, delay: 400 }}
-  out:fade
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
 >
   <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-      Category Details
-    </h2>
-    <button
+    <MotionDiv
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.5 }}
+    >
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+        Category Details
+      </h2>
+    </MotionDiv>
+    <MotionButton
       on:click={() => showDetails = !showDetails}
-      class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors duration-200"
+      class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: 0.6 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {showDetails ? 'Hide Details' : 'Show Details'}
-    </button>
+    </MotionButton>
   </div>
   
   {#if showDetails}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <MotionDiv 
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, delay: 0.7 }}
+    >
       {#each $categoryData as item, index}
-                 <button 
-           class="p-4 rounded-lg border border-gray-200 dark:border-dark-700 hover:shadow-md transition-shadow duration-200 cursor-pointer w-full text-left
-             {selectedCategory === item.category ? 'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-900/20' : ''}"
-           on:click={() => selectedCategory = selectedCategory === item.category ? '' : item.category}
-           type="button"
-         >
+        <MotionCard
+          class="p-4 rounded-lg border border-gray-200 dark:border-dark-700 cursor-pointer w-full text-left
+            {selectedCategory === item.category ? 'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-900/20' : ''}"
+          on:click={() => selectedCategory = selectedCategory === item.category ? '' : item.category}
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
+          whileHover={{ y: -5, scale: 1.02, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" }}
+          whileTap={{ scale: 0.98 }}
+        >
           <div class="flex items-center space-x-3 mb-2">
-            <div 
+            <MotionDiv 
               class="w-4 h-4 rounded-full"
               style="background-color: {item.color}"
-            ></div>
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3, delay: 1 + (index * 0.1), type: "spring", stiffness: 200 }}
+            ></MotionDiv>
             <h3 class="font-medium text-gray-900 dark:text-white">{item.category}</h3>
           </div>
-          <div class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+          <MotionDiv
+            class="text-2xl font-bold text-gray-900 dark:text-white mb-1"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.4, delay: 1.1 + (index * 0.1), type: "spring", stiffness: 200 }}
+          >
             {item.value}%
-          </div>
+          </MotionDiv>
           <div class="w-full bg-gray-200 dark:bg-dark-700 rounded-full h-2">
-            <div 
-              class="h-2 rounded-full transition-all duration-500"
-              style="width: {item.value}%; background-color: {item.color}"
-            ></div>
+            <MotionDiv 
+              class="h-2 rounded-full"
+              style="background-color: {item.color}"
+              initial={{ width: 0 }}
+              animate={{ width: `${item.value}%` }}
+              transition={{ duration: 0.8, delay: 1.2 + (index * 0.1), ease: "easeOut" }}
+            ></MotionDiv>
           </div>
-        </button>
+        </MotionCard>
       {/each}
-    </div>
+    </MotionDiv>
   {/if}
-</div>
+</MotionCard>
 
-<!-- Svelte features explanation -->
-<div 
-  class="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 mt-6 border border-green-200 dark:border-green-800"
-  in:fly={{ y: 20, duration: 600, delay: 500 }}
-  out:fade
->
-  <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-3">
-     Svelte Features Demonstrated
-  </h3>
-  <ul class="space-y-2 text-sm text-green-800 dark:text-green-200">
-    <li><strong>Local State:</strong> selectedCategory and showDetails demonstrate component-level state</li>
-    <li><strong>Reactive Statements:</strong> Chart updates automatically when data changes</li>
-    <li><strong>Event Handling:</strong> Click events for category selection and button interactions</li>
-    <li><strong>Conditional Rendering:</strong> Show/hide details based on state</li>
-    <li><strong>Dynamic Classes:</strong> Conditional styling based on selection state</li>
-    <li><strong>Store Updates:</strong> addCategory, removeCategory, shuffleData functions modify store data</li>
-  </ul>
-</div>
+
