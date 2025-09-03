@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-  <title>Svelte D3 Dashboard</title>
+  <title>Crayon Dashboard</title>
   <meta name="description" content="Modern SvelteKit application with D3.js visualizations" />
 </svelte:head>
 

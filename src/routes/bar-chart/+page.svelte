@@ -305,7 +305,7 @@
   out:fade
 >
   <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-3">
-    🎯 Svelte Features Demonstrated
+     Svelte Features Demonstrated
   </h3>
   <ul class="space-y-2 text-sm text-green-800 dark:text-green-200">
     <li><strong>Local State:</strong> selectedCategory and showDetails demonstrate component-level state</li>

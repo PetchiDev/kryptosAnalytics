@@ -39,10 +39,10 @@
     <!-- Logo section -->
     <div class="flex items-center space-x-3 mb-8">
       <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-purple-500 rounded-lg flex items-center justify-center">
-        <span class="text-white font-bold text-lg">SD</span>
+        <span class="text-white font-bold text-lg">C</span>
       </div>
       <div>
-        <h1 class="text-lg font-semibold text-gray-900 dark:text-white">Svelte D3</h1>
+        <h1 class="text-lg font-semibold text-gray-900 dark:text-white">Crayon</h1>
         <p class="text-sm text-gray-500 dark:text-gray-400">Analytics Dashboard</p>
       </div>
     </div>

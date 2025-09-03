@@ -22,9 +22,10 @@
     <div class="flex justify-between h-16">
       <!-- Logo and title -->
       <div class="flex items-center">
-        <div class="flex-shrink-0 flex items-center">
+        <div class="flex-shrink-0 flex items-center space-x-3">
+      
           <div class="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-            Svelte D3 Dashboard
+            Crayon 
           </div>
         </div>
       </div>

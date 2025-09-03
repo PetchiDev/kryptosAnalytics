@@ -274,7 +274,7 @@
   out:fade
 >
   <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
-    🎯 Svelte Features Demonstrated
+     Svelte Features Demonstrated
   </h3>
   <ul class="space-y-2 text-sm text-blue-800 dark:text-blue-200">
     <li><strong>Stores:</strong> Using writable stores for global state management (salesData, totalSales, averageProfit)</li>
