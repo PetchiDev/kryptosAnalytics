@@ -92,8 +92,13 @@
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        {showAdvanced ? <Pause class="w-4 h-4 mr-2" /> : <Play class="w-4 h-4 mr-2" />}
-        {showAdvanced ? 'Pause' : 'Play'} Animations
+        {#if showAdvanced}
+          <Pause class="w-4 h-4 mr-2" />
+          Pause
+        {:else}
+          <Play class="w-4 h-4 mr-2" />
+          Play
+        {/if} Animations
       </MotionButton>
       
       <MotionButton
