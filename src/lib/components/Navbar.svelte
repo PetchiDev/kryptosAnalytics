@@ -34,9 +34,9 @@
         {#each navItems as item}
           <a 
             href={item.href}
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105
+            class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 relative
               {$page.url.pathname === item.href 
-                ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 shadow-md' 
+                ? 'text-white bg-gradient-to-r from-primary-500 to-primary-600 shadow-lg transform scale-105' 
                 : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-700'
               }"
           >
@@ -78,9 +78,9 @@
       {#each navItems as item}
         <a 
           href={item.href}
-          class="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-all duration-200 hover:scale-105
+          class="flex items-center space-x-2 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 hover:scale-105
             {$page.url.pathname === item.href 
-              ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 shadow-md' 
+              ? 'text-white bg-gradient-to-r from-primary-500 to-primary-600 shadow-lg transform scale-105' 
               : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-700'
             }"
         >

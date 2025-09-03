@@ -52,16 +52,16 @@
       {#each navItems as item}
         <a 
           href={item.href}
-          class="group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 hover:scale-105
+          class="group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105 relative
             {currentPath === item.href 
-              ? 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-600 dark:text-primary-400 border-r-2 border-primary-500 shadow-md' 
+              ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg transform scale-105 border-r-4 border-white' 
               : 'text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-dark-700 dark:hover:to-dark-600 hover:text-primary-600 dark:hover:text-primary-400'
             }"
         >
           <svelte:component this={item.icon} size={20} class="group-hover:scale-110 transition-transform duration-200" />
           <div class="flex-1">
             <div class="font-medium">{item.label}</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400">
+            <div class="text-xs {currentPath === item.href ? 'text-white/80' : 'text-gray-500 dark:text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400'}">
               {item.description}
             </div>
           </div>

@@ -21,15 +21,16 @@
   let tooltip;
   
   // Reactive statement to redraw chart when data changes
-  $: if (data.length > 0) {
+  $: if (data.length > 0 && svg) {
     drawChart();
   }
   
   function drawChart() {
     if (!svg || !data.length) return;
     
-    // Clear previous content
-    svg.selectAll('*').remove();
+    try {
+      // Clear previous content
+      svg.selectAll('*').remove();
     
     // Create pie generator
     const pie = d3.pie()
@@ -133,12 +134,18 @@
         // Dispatch custom event
         dispatch('segmentClick', { data: d.data, event });
       });
+    } catch (error) {
+      console.error('Error drawing pie chart:', error);
+    }
   }
   
   onMount(() => {
-    if (data.length > 0) {
-      drawChart();
-    }
+    // Wait for next tick to ensure svg is bound
+    setTimeout(() => {
+      if (data.length > 0 && svg) {
+        drawChart();
+      }
+    }, 0);
   });
 </script>
 

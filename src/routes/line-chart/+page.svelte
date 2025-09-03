@@ -1,9 +1,9 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { fly, fade } from 'svelte/transition';
-  import LineChart from '$lib/components/charts/LineChart.svelte';
+  import ChartJSLineChart from '$lib/components/charts/ChartJSLineChart.svelte';
   import { salesData, totalSales, averageProfit } from '$lib/stores/data.js';
-  import { Play, Pause, Plus, RotateCcw } from 'lucide-svelte';
+  import { Play, Pause, Plus, RotateCcw, TrendingUp } from 'lucide-svelte';
   
   // Demonstrates Svelte stores and reactivity
   let isPlaying = false;
@@ -25,9 +25,14 @@
     { month: 'Dec', sales: 65000, profit: 38000 }
   ];
   
-  // Initialize store with sample data
+  // Initialize store with sample data immediately
+  salesData.set(sampleData);
+  
   onMount(() => {
-    salesData.set(sampleData);
+    // Ensure data is set on mount as well
+    if ($salesData.length === 0) {
+      salesData.set(sampleData);
+    }
   });
   
   // Function to add random data point - demonstrates store updates
@@ -85,12 +90,19 @@
   in:fly={{ y: -20, duration: 600 }}
   out:fade
 >
-  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-    Sales Trend Analysis
-  </h1>
-  <p class="text-gray-600 dark:text-gray-400">
-    Interactive line chart demonstrating Svelte stores and D3.js integration
-  </p>
+  <div class="flex items-center space-x-4 mb-4">
+    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+      <TrendingUp class="w-6 h-6 text-white" />
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+        Sales Trend Analysis
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        Beautiful Chart.js line chart with smooth animations and modern styling
+      </p>
+    </div>
+  </div>
 </div>
 
 <!-- Controls section -->
@@ -180,17 +192,37 @@
   in:fly={{ y: 20, duration: 600, delay: 300 }}
   out:fade
 >
-  <div class="mb-4">
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-      Monthly Sales Performance
-    </h2>
-    <p class="text-gray-600 dark:text-gray-400 text-sm">
-      This chart demonstrates Svelte stores reactivity - watch how the chart updates automatically when data changes!
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          Monthly Sales Performance
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">
+          Interactive Chart.js visualization with beautiful gradients and smooth animations
+        </p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+        <span class="text-sm text-gray-600 dark:text-gray-400">Sales</span>
+        <div class="w-3 h-3 bg-green-500 rounded-full ml-4"></div>
+        <span class="text-sm text-gray-600 dark:text-gray-400">Profit</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Debug: Show data info -->
+  <div class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+    <p class="text-sm text-gray-600 dark:text-gray-400">
+      <strong>Data Status:</strong> {$salesData.length} items loaded
+      {#if $salesData.length > 0}
+        | First item: {$salesData[0].month} - Sales: ${$salesData[0].sales}
+      {/if}
     </p>
   </div>
   
   <!-- Line chart component -->
-  <LineChart 
+  <ChartJSLineChart 
     data={$salesData} 
     width={800} 
     height={400}

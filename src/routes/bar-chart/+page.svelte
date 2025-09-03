@@ -1,8 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import { fly, fade } from 'svelte/transition';
-  import BarChart from '$lib/components/charts/BarChart.svelte';
+  import ChartJSBarChart from '$lib/components/charts/ChartJSBarChart.svelte';
   import { categoryData } from '$lib/stores/data.js';
+  import { BarChart } from 'lucide-svelte';
   
   // Demonstrates Svelte local state and reactivity
   let selectedCategory = '';
@@ -17,9 +18,14 @@
     { category: 'Sports', value: 5, color: '#8b5cf6' }
   ];
   
-  // Initialize store with sample data
+  // Initialize store with sample data immediately
+  categoryData.set(sampleData);
+  
   onMount(() => {
-    categoryData.set(sampleData);
+    // Ensure data is set on mount as well
+    if ($categoryData.length === 0) {
+      categoryData.set(sampleData);
+    }
   });
   
   // Function to add new category
@@ -92,12 +98,19 @@
   in:fly={{ y: -20, duration: 600 }}
   out:fade
 >
-  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-    Category Analysis
-  </h1>
-  <p class="text-gray-600 dark:text-gray-400">
-    Interactive bar chart with sorting and filtering capabilities
-  </p>
+  <div class="flex items-center space-x-4 mb-4">
+    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+      <BarChart class="w-6 h-6 text-white" />
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+        Category Analysis
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        Modern Chart.js bar chart with beautiful gradients and interactive features
+      </p>
+    </div>
+  </div>
 </div>
 
 <!-- Controls section -->
@@ -200,17 +213,35 @@
   in:fly={{ y: 20, duration: 600, delay: 300 }}
   out:fade
 >
-  <div class="mb-4">
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-      Category Distribution
-    </h2>
-    <p class="text-gray-600 dark:text-gray-400 text-sm">
-      Click on bars to select categories. Use the controls above to sort and filter the data.
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          Category Distribution
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">
+          Beautiful Chart.js bar chart with gradient fills and smooth animations
+        </p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <div class="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+        <span class="text-sm text-gray-600 dark:text-gray-400">Interactive Bars</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Debug: Show data info -->
+  <div class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+    <p class="text-sm text-gray-600 dark:text-gray-400">
+      <strong>Data Status:</strong> {$categoryData.length} items loaded
+      {#if $categoryData.length > 0}
+        | First item: {$categoryData[0].category} - Value: {$categoryData[0].value}%
+      {/if}
     </p>
   </div>
   
   <!-- Bar chart component -->
-  <BarChart 
+  <ChartJSBarChart 
     data={$categoryData} 
     width={800} 
     height={400}
